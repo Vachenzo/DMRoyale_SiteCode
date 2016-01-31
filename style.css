@@ -1,0 +1,233 @@
+textarea{
+	width:95%;
+    resize:none;
+}
+
+body { background-color: #eeeeee; 
+        color: #000000; 
+		font-family: 'Roboto', sans-serif;
+		font-size: 10pt;
+		height: 100%
+} 
+table {
+	border:0px;	
+}
+
+hr{
+	color: #ffffff;
+}
+
+td{
+	border:0px;
+	text-align: left;
+	vertical-align:top;
+	padding: 5px 5px 5px 5px;
+}
+
+textarea { resize: none; }
+
+input {
+
+    border-radius: 0;
+}
+	
+input[type=button]{
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+	border:0px;
+	color: #888888; 
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #2196F3;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+	line-height: 1;
+	font-size: 10pt; 
+}
+
+input[type=button]:hover{
+background-color: #1976D2;
+}
+	
+#wrapper { 
+		background-color: #ffffff;
+		margin-left:auto;
+		margin-right:auto;
+		width: 960px;
+		box-shadow: 2px 2px 5px #dddddd;
+		padding: 5px;
+
+		
+}  
+
+ul  li{ 
+			list-style-type:none; 
+		} 
+
+#header{
+		background-color: #2196F3;
+		background-image: url("uploads/headerDragon.png");
+		padding: 5px;
+		box-shadow: 0px 2px 5px #999999;
+		background-repeat: no-repeat;
+		background-position:680px -10px;
+}
+
+#title h1{
+	color: #ffffff;
+	font-size: 32px;
+	font-weight: 200;
+
+}
+
+#title a {
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #2196F3;
+	color: #fff;
+	text-decoration: none;
+
+}
+
+h1{
+	font-weight: 300;
+}
+h2{
+	font-weight: 300;
+}
+
+h3{
+	font-weight: 300;
+}
+
+h4{
+	font-weight: 300;
+}
+#logo {   
+       border-bottom: 0px solid #000000; 
+       padding:10px; 
+}
+
+#button a {
+      border: 0px;
+      color: #ffffff;
+      font-size: 10pt;      
+      text-align: center;
+      text-decoration: none;       
+}
+
+#shadow{
+	box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+input[type=submit] {
+	color: #888888; 
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #43A047;
+	color: #fff;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	line-height: 1;
+	border-style: none;
+	font-size: 10pt; 
+}
+
+input[type=submit]:hover {
+	background-color: #2E7D32;
+}
+
+#Delete a{
+	color: #888888; 
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #E53935;
+	color: #fff;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	line-height: 1;
+	border-style: none;
+	font-size: 10pt; 
+}
+
+#Delete a:hover {
+	background-color: #C62828;
+}
+
+#GreenButton a{
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #43A047;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+	line-height: 1;
+	font-size: 10pt; 
+}
+
+#GreenButton a:hover {
+	background-color: #2E7D32;
+}
+
+#BigMenuButton{
+	color: #888888; 
+	
+}
+
+#BigMenuButton a {
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #2196F3;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+	line-height: 1;
+	font-size: 20pt; 
+}
+
+#BigMenuButton a:hover{
+background-color: #1976D2;
+}
+
+#MenuButton a {
+	color: #888888; 
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #2196F3;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+	line-height: 1;
+	font-size: 10pt; 
+}
+
+#MenuButton a:hover{
+background-color: #1976D2;
+}
+
+#MenuButton2{
+	color: #888888; 
+	
+}
+
+#MenuButton2 a {
+	display: inline-block;
+	padding: 5px 10px 6px;
+	background-color: #64B5F6;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+	line-height: 1;
+	font-size: 10pt; 
+}
+
+#MenuButton2 a:hover{
+background-color: #2196F3;
+}
+
+#gray{
+	color: #888888;
+}

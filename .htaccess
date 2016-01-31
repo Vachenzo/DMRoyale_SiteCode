@@ -1,0 +1,3 @@
+AuthUserFile "/home/dmroyale/.htpasswds/public_html/passwd"
+AuthName "Login"
+Options -Indexes
