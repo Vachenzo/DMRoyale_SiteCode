@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "dmroyale";
 $password = "U2Ac1m4y7g";
-$dbname = "dmroyale_prod";
+$dbname = "dmroyale_test";
 
 // Create connection and check error - for queries
 mysql_connect($servername, $username, $password) 

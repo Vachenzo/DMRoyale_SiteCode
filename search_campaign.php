@@ -12,10 +12,10 @@ if(isset($_POST['submit'])){
 		$name=$_POST['name'];
 
 		//connect to the database
-		$db=mysql_connect ("localhost", "dmroyale", "U2Ac1m4y7g") or die ('I cannot connect to the database because: ' . mysql_error()); 
+		$db=mysql_connect($servername, $username, $password)  or die ('I cannot connect to the database because: ' . mysql_error()); 
 
 		//-select the database to use
-		$mydb=mysql_select_db("dmroyale_dd_site");
+		$mydb=mysql_select_db($dbname);
 
 		//-query the database table
 		$sql="SELECT * FROM campaign WHERE campaignname LIKE '%" . $name . "%' OR dungeonmaster LIKE '%" . $name ."%'";

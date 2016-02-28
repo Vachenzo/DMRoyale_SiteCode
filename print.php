@@ -331,11 +331,11 @@ Player Name:</br>
 	</br>
 <?php
 // Connects to your Database  
-mysql_connect("localhost", "dmroyale", "U2Ac1m4y7g") 
+mysql_connect($servername, $username, $password) 
 	or die(mysql_error());
 
 //Select the DB
-mysql_select_db("dmroyale_dd_site") 
+mysql_select_db($dbname) 
 	or die(mysql_error());
 
 //Check the id in the URL
