@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
- sec_session_start();
+sec_session_start();
  
 include 'includes/connections.php';
 
@@ -31,7 +31,7 @@ else{
 }
 
 //redirect
-header("Location: view_character.php?id=$id");
+header("Location: view_character.php?id=$id#proflang");
 die();
 
 $conn->close();

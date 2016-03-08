@@ -231,3 +231,13 @@ background-color: #2196F3;
 #gray{
 	color: #888888;
 }
+
+.FloatDiv{
+	padding-left : 5px;
+	float: left;
+}
+
+#notice{
+	position: fixed;
+    top: 20px;
+}

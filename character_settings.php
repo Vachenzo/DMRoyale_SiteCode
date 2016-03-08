@@ -16,9 +16,6 @@ $info = mysql_fetch_array( $data );
 
 ?>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_combat.php?id=<?php Print $id;?>">Combat</a>   
-</div>
-<div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_character.php?id=<?php Print $id;?>">Character</a>   
 </div>
 
@@ -31,9 +28,6 @@ $info = mysql_fetch_array( $data );
 </div>
 <div id="MenuButton2" style="float:left;padding-right: 10px;">
 	<a>Settings</a>
-</div>
-<div id='MenuButton'>
-	<a href="view_print.php?id=<?php Print "".$id ."";?>" target="_blank">Print</a>
 </div>
 <p>&nbsp;</p>
 <h1><?php Print "".$info['character_name'] . ": Settings";?></h1>

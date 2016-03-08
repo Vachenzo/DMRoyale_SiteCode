@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
- sec_session_start();
+sec_session_start();
  
  include 'includes/connections.php';
 
@@ -20,6 +20,11 @@ $result = mysql_query($query)  or die(mysql_error());
 //put results into array
 $array = mysql_fetch_array( $result );
 
+/*
+if ($conn->query($sql1) === TRUE) {
+	}	
+*/
+
 //verify that user name is correct
 if ($array['player_name'] == $_SESSION['username']){
 	if ($conn->query($sql1) === TRUE) {
@@ -31,7 +36,7 @@ else{
 }
 
 //redirect
-header("Location: view_character.php?id=$id");
+header("Location: view_character.php?id=$id#attacks");
 die();
 
 $conn->close();

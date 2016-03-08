@@ -10,9 +10,6 @@ $chardata = mysql_query("SELECT * FROM character_sheet WHERE character_id = " . 
 $charinfo = mysql_fetch_array( $chardata );
 ?>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_combat.php?id=<?php Print $id;?>">Combat</a>   
-</div>
-<div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_character.php?id=<?php Print $id;?>">Character</a>   
 </div>
 
@@ -25,9 +22,6 @@ $charinfo = mysql_fetch_array( $chardata );
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_settings.php?id=<?php Print "".$id ."";?>">Settings</a>
-</div>
-<div id='MenuButton'>
-	<a href="view_print.php?id=<?php Print "".$id ."";?>" target="_blank">Print</a>
 </div>
 <p>&nbsp;</p>
 <h1><?php Print "".$charinfo['character_name']."'s Backstory";?></h1>
