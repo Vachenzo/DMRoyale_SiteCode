@@ -73,6 +73,44 @@ sec_session_start();
 		$(function(){
 			$('INPUT').autoSubmit();
 			$('SELECT').autoSubmit();
+			$('#newProficiency').submit(function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: $('#newProficiency').attr('action'),
+					type: "POST",
+					data: {
+						new_proflang_name: $("#new_proflang_name").val()
+					},
+					cache: false,
+					timeout: 10000,
+					success: function(data) {
+						// Alert if update failed
+						try {
+							var jsonObject = $.parseJSON(data);
+							console.log(jsonObject);
+							var characterId = jsonObject.character_id;
+							var name        = jsonObject.proflang_name;
+							var proflang_id = jsonObject.proflang_id;
+							$('#newProficiency').after('\
+								<form id="ajax-form" class="autosubmit" method="POST" action="proflang_update.php?id='+characterId+'">\
+									<div class="FloatDiv"><input type="text" name="proflang_name" id="proflang_name" value="'+name+'" REQUIRED></div>\
+									<div id="Delete" class="FloatDiv"><a href="delete_proflang.php?id=<?PHP echo $id ?>&proflang='+proflang_id+'">Delete?</a></div>\
+									<div class="FloatDiv"><input type="hidden" name="proflang_id" id="where" value="'+proflang_id+'"/></div>\
+								</form>\
+								</br>\
+								</br>\
+								');
+							$('#notice').text('Updated');
+							$('#notice').fadeOut().fadeIn().fadeOut();
+						} catch(e) {
+							alert(e);
+						  // handle error
+						}
+					}
+				});
+
+				return false;
+			});
 		});
 		</script>
 		<script>

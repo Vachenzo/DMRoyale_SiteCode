@@ -304,7 +304,7 @@ $row = mysql_fetch_assoc($result);
 <!-- END TOP OF CHARACTER SHEET-->	
 
 	<h2 id="proflang">Proficiencies & Languages</h2>
-	<form method="POST" action="./new_proflang.php?id=<?PHP echo $id ?>">
+	<form method="POST" id="newProficiency" action="./new_proflang.php?id=<?PHP echo $id ?>">
 		<div class="FloatDiv"><input type="text" name="new_proflang_name" id="new_proflang_name"   placeholder="Add Prof/Lang"></div>
 		<div class="FloatDiv"><input type="submit" name='submit' value="Add Prof/Lang" ></div>
 		</br>
