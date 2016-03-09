@@ -28,13 +28,13 @@ $row = mysql_fetch_assoc($result);
 	<a>Character</a>   
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_story.php?id=<?php Print "".$id ."";?>">Backstory</a>   
+	<a href="view_story.php?id=<?php Print $id ."";?>">Backstory</a>   
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_cantrips.php?id=<?php Print "".$id ."";?>">Spells</a>
+	<a href="view_cantrips.php?id=<?php Print $id ."";?>">Spells</a>
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_settings.php?id=<?php Print "".$id ."";?>">Settings</a>
+	<a href="view_settings.php?id=<?php Print $id ."";?>">Settings</a>
 </div>
 <p>&nbsp;</p>
 <h1><?php echo $row['character_name'] . "'s Character Sheet";?></h1>
@@ -332,7 +332,7 @@ $row = mysql_fetch_assoc($result);
 
 	<h2 id="attacks">Attacks and Spellcasting</h2>
 	
-	<form method="POST" action="new_attack.php?id=<?PHP echo $id ?>">
+	<form method="POST" id="newProficiency" action="new_attack.php?id=<?PHP echo $id ?>">
 		<div class="FloatDiv"><input type="text" name="new_attack_name" id="new_attack_name"   size='20' placeholder="Add Name"></div>
 		<div class="FloatDiv"><input type="text" name="new_attack_bonus" id="new_attack_bonus"  placeholder="Add Bonus"></div>
 		<div class="FloatDiv"><input type="text" name="new_attack_damage_type" id="new_attack_damage_type"  size='15'  placeholder="Add Damage/Type"></div>
@@ -367,17 +367,19 @@ $row = mysql_fetch_assoc($result);
 			
 		<?php } ?>
 	
-<!--
+
 	<h2>Currency</h2>
-	<table>
-		<tr>
-			<td>CP:</td><td><input type="number" name="cp" id="cp"  style="width:110px" value="<?php Print "".$info['cp_count'] . "";?>" required></td></tr>
-			<td>SP:</td><td><input type="number" name="sp" id="sp"  style="width:110px" value="<?php Print "".$info['sp_count'] . "";?>" required></td></tr>
-			<td>EP:</td><td><input type="number" name="ep" id="ep"  style="width:110px" value="<?php Print "".$info['ep_count'] . "";?>" required></td></tr>
-			<td>GP:</td><td><input type="number" name="gp" id="gp"  style="width:110px" value="<?php Print "".$info['gp_count'] . "";?>" required></td></tr>
-			<td>PP:</td><td><input type="number" name="pp" id="pp"  style="width:110px" value="<?php Print "".$info['pp_count'] . "";?>" required></td></tr>
-	</table>
+	<form id="ajax-form" class="autosubmit" method="POST" action="./character_update.php">
+		<input type="number" name="cp_count" id="cp"  style="width:110px" value="<?php Print $row['cp_count'];?>" required>CP</br></br>
+		<input type="number" name="sp_count" id="sp"  style="width:110px" value="<?php Print $row['sp_count'];?>" required>SP</br></br>
+		<input type="number" name="ep_count" id="ep"  style="width:110px" value="<?php Print $row['ep_count'];?>" required>EP</br></br>
+		<input type="number" name="gp_count" id="gp"  style="width:110px" value="<?php Print $row['gp_count'];?>" required>GP</br></br>
+		<input type="number" name="pp_count" id="pp"  style="width:110px" value="<?php Print $row['pp_count'];?>" required>PP</br></br>
+		<input id="where" type="hidden" name="character_id" value="<?php echo $row['character_id'] ?>" />
+	</form>
+
 	</br>
+	<!--
 	<h2>Inventory</h2>
 	<table>
 		<tr>
