@@ -303,82 +303,103 @@ $row = mysql_fetch_assoc($result);
 	</form>
 <!-- END TOP OF CHARACTER SHEET-->	
 
-	<h2 id="proflang">Proficiencies & Languages</h2>
-	<form method="POST" id="newProficiency" action="./new_proflang.php?id=<?PHP echo $id ?>">
-		<div class="FloatDiv"><input type="text" name="new_proflang_name" id="new_proflang_name"   placeholder="Add Prof/Lang"></div>
-		<div class="FloatDiv"><input type="submit" name='submit' value="Add Prof/Lang" ></div>
-		</br>
-		</br>
+<h2 id="proflang">Proficiencies & Languages</h2>
+<form method="POST" id="newProficiency" action="./new_proflang.php?id=<?PHP echo $id ?>">
+	<div class="FloatDiv"><input type="text" name="new_proflang_name" id="new_proflang_name"   placeholder="Add Prof/Lang"></div>
+	<div class="FloatDiv"><input type="submit" name='submit' value="Add Prof/Lang" ></div>
+	</br>
+	</br>
+</form>
+<?php
+/*
+ * DATABASE QUERY
+ */
+// DATABASE: Get current row
+$p_result = mysql_query("SELECT * FROM proficiency_language WHERE character_id =".$id)
+	or die(mysql_error());
+
+while($p_array = mysql_fetch_array($p_result)) { 
+?>
+	<form id="ajax-form" class="autosubmit" method="POST" action="proflang_update.php?id=<?PHP echo $id ?>">
+		<div class="FloatDiv"><input type='text' name='proflang_name' id='proflang_name' value='<?php echo htmlspecialchars($p_array['proflang_name'], ENT_QUOTES) ?>' REQUIRED></div>
+		<div id="Delete" class="FloatDiv"><a href='delete_proflang.php?id=<?PHP echo $id ?>&proflang=<?php echo $p_array['proflang_id'] ?>'>Delete?</a></div>
+		<div class="FloatDiv"><input type='hidden' name='proflang_id' id='where' value='<?php echo $p_array['proflang_id'] ?>'/></div>
 	</form>
-		<?php
+	</br>
+	</br>
+<?php } ?>		
+
+
+<h2 id="attacks">Attacks and Spellcasting</h2>
+
+<form method="POST" id="newProficiency" action="new_attack.php?id=<?PHP echo $id ?>">
+	<div class="FloatDiv"><input type="text" name="new_attack_name" id="new_attack_name"   size='20' placeholder="Add Name"></div>
+	<div class="FloatDiv"><input type="text" name="new_attack_bonus" id="new_attack_bonus"  placeholder="Add Bonus"></div>
+	<div class="FloatDiv"><input type="text" name="new_attack_damage_type" id="new_attack_damage_type"  size='15'  placeholder="Add Damage/Type"></div>
+	<div class="FloatDiv"><input type="text" name="new_attack_description" id="new_attack_description"  size='40'  placeholder="Add Description"></div>
+	<div class="FloatDiv"><input type="submit" name='submit' value="Add Attack" ></div>
+</form>
+</br>
+</br>
+<?php
+/*
+ * DATABASE QUERY
+ */
+
+// DATABASE: Get current row
+$a_result = mysql_query("SELECT * FROM attacks WHERE character_id =".$id)
+	or die(mysql_error());
+
+while($a_array = mysql_fetch_array($a_result)) { 
+	//$a_row = mysql_fetch_assoc($a_array); 
+?>
+		
+<form id="ajax-form" class="autosubmit" method="POST" action="./attack_update.php">
+	<div class="FloatDiv"><input type='text' name='attack_name' value='<?php echo htmlspecialchars($a_array['attack_name'], ENT_QUOTES) ?>' REQUIRED></div>
+	<div class="FloatDiv"><input type='text' name='attack_bonus' value='<?php echo htmlspecialchars($a_array['attack_bonus'], ENT_QUOTES) ?>' ></div>
+	<div class="FloatDiv"><input type='text' name='attack_damage_type' size='15' value='<?php echo htmlspecialchars($a_array['attack_damage_type'], ENT_QUOTES) ?>' ></div>
+	<div class="FloatDiv"><input type='text' maxlength='120'name='attack_description' size='40' value='<?php echo htmlspecialchars($a_array['attack_description'], ENT_QUOTES)?>' ></div>
+	<div class="FloatDiv"><input type='hidden' name='attack_id' id='where' value='<?php echo $a_array['attack_id'] ?>'/></div>
+</form>
+<div id="Delete" class="FloatDiv"><a href="delete_attack.php?id=<?PHP echo $id ?>&attack=<?PHP echo $a_array['attack_id'] ?>">Delete?</a></div>
+</br>
+</br>
+	
+<?php } ?>
+	
+
+<h2>Currency</h2>
+<form id="ajax-form" class="autosubmit" method="POST" action="./character_update.php">
+	<input type="number" name="cp_count" id="cp"  style="width:110px" value="<?php Print $row['cp_count'];?>" required>CP</br></br>
+	<input type="number" name="sp_count" id="sp"  style="width:110px" value="<?php Print $row['sp_count'];?>" required>SP</br></br>
+	<input type="number" name="ep_count" id="ep"  style="width:110px" value="<?php Print $row['ep_count'];?>" required>EP</br></br>
+	<input type="number" name="gp_count" id="gp"  style="width:110px" value="<?php Print $row['gp_count'];?>" required>GP</br></br>
+	<input type="number" name="pp_count" id="pp"  style="width:110px" value="<?php Print $row['pp_count'];?>" required>PP</br></br>
+	<input id="where" type="hidden" name="character_id" value="<?php echo $row['character_id'] ?>" />
+</form>
+</br>
+</br>
+<h2>Inventory</h2>
+<?php
 		/*
 		 * DATABASE QUERY
 		 */
 		// DATABASE: Get current row
-		$p_result = mysql_query("SELECT * FROM proficiency_language WHERE character_id =".$id)
+		$i_result = mysql_query("SELECT * FROM items WHERE character_id =".$id)
 			or die(mysql_error());
 
-		while($p_array = mysql_fetch_array($p_result)) { 
+		while($i_array = mysql_fetch_array($i_result)) { 
 		?>
-			<form id="ajax-form" class="autosubmit" method="POST" action="proflang_update.php?id=<?PHP echo $id ?>">
-				<div class="FloatDiv"><input type='text' name='proflang_name' id='proflang_name' value='<?php echo htmlspecialchars($p_array['proflang_name'], ENT_QUOTES) ?>' REQUIRED></div>
-				<div id="Delete" class="FloatDiv"><a href='delete_proflang.php?id=<?PHP echo $id ?>&proflang=<?php echo $p_array['proflang_id'] ?>'>Delete?</a></div>
-				<div class="FloatDiv"><input type='hidden' name='proflang_id' id='where' value='<?php echo $p_array['proflang_id'] ?>'/></div>
+			<form id="ajax-form" class="autosubmit" method="POST" action="./item_update.php">
+				<input type='number' name='item_count' value="<?PHP echo $i_array['item_count']?>" REQUIRED>
+				<input type='text' name='item_name' value='<?PHP echo $i_array['item_name']?>' REQUIRED>
+				<input type='text' name='item_weight' value='<?PHP echo $i_array['item_weight']?>'>
+				<td id='Delete'><a href='delete_item.php?id=<?PHP echo $id ?>&item=<?php echo $i_array['item_id'] ?>'>Delete?</a>
+				<input type='hidden' name='item_id' id='where' value='<?php echo $i_array['item_id'] ?>'/>
 			</form>
 			</br>
 			</br>
-		<?php } ?>		
-
-
-	<h2 id="attacks">Attacks and Spellcasting</h2>
-	
-	<form method="POST" id="newProficiency" action="new_attack.php?id=<?PHP echo $id ?>">
-		<div class="FloatDiv"><input type="text" name="new_attack_name" id="new_attack_name"   size='20' placeholder="Add Name"></div>
-		<div class="FloatDiv"><input type="text" name="new_attack_bonus" id="new_attack_bonus"  placeholder="Add Bonus"></div>
-		<div class="FloatDiv"><input type="text" name="new_attack_damage_type" id="new_attack_damage_type"  size='15'  placeholder="Add Damage/Type"></div>
-		<div class="FloatDiv"><input type="text" name="new_attack_description" id="new_attack_description"  size='40'  placeholder="Add Description"></div>
-		<div class="FloatDiv"><input type="submit" name='submit' value="Add Attack" ></div>
-	</form>
-	</br>
-	</br>
-		<?php
-		/*
-		 * DATABASE QUERY
-		 */
-
-		// DATABASE: Get current row
-		$a_result = mysql_query("SELECT * FROM attacks WHERE character_id =".$id)
-			or die(mysql_error());
-
-		while($a_array = mysql_fetch_array($a_result)) { 
-			//$a_row = mysql_fetch_assoc($a_array); 
-		?>
-							
-					<form id="ajax-form" class="autosubmit" method="POST" action="./attack_update.php">
-						<div class="FloatDiv"><input type='text' name='attack_name' value='<?php echo htmlspecialchars($a_array['attack_name'], ENT_QUOTES) ?>' REQUIRED></div>
-						<div class="FloatDiv"><input type='text' name='attack_bonus' value='<?php echo htmlspecialchars($a_array['attack_bonus'], ENT_QUOTES) ?>' ></div>
-						<div class="FloatDiv"><input type='text' name='attack_damage_type' size='15' value='<?php echo htmlspecialchars($a_array['attack_damage_type'], ENT_QUOTES) ?>' ></div>
-						<div class="FloatDiv"><input type='text' maxlength='120'name='attack_description' size='40' value='<?php echo htmlspecialchars($a_array['attack_description'], ENT_QUOTES)?>' ></div>
-						<div class="FloatDiv"><input type='hidden' name='attack_id' id='where' value='<?php echo $a_array['attack_id'] ?>'/></div>
-					</form>
-					<div id="Delete" class="FloatDiv"><a href="delete_attack.php?id=<?PHP echo $id ?>&attack=<?PHP echo $a_array['attack_id'] ?>">Delete?</a></div>
-					</br>
-					</br>
-			
-		<?php } ?>
-	
-
-	<h2>Currency</h2>
-	<form id="ajax-form" class="autosubmit" method="POST" action="./character_update.php">
-		<input type="number" name="cp_count" id="cp"  style="width:110px" value="<?php Print $row['cp_count'];?>" required>CP</br></br>
-		<input type="number" name="sp_count" id="sp"  style="width:110px" value="<?php Print $row['sp_count'];?>" required>SP</br></br>
-		<input type="number" name="ep_count" id="ep"  style="width:110px" value="<?php Print $row['ep_count'];?>" required>EP</br></br>
-		<input type="number" name="gp_count" id="gp"  style="width:110px" value="<?php Print $row['gp_count'];?>" required>GP</br></br>
-		<input type="number" name="pp_count" id="pp"  style="width:110px" value="<?php Print $row['pp_count'];?>" required>PP</br></br>
-		<input id="where" type="hidden" name="character_id" value="<?php echo $row['character_id'] ?>" />
-	</form>
-
-	</br>
+		<?php } ?>	
 	<!--
 	<h2>Inventory</h2>
 	<table>
