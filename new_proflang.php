@@ -16,14 +16,13 @@ if (!empty($new_proflang_name)){
 	$sql2 = "INSERT INTO proficiency_language (proflang_name, character_id) VALUES('$new_proflang_name', $id)";	
 	//check that the connection to the table works
 	if ($conn->query($sql2) === TRUE) {	
-			//echo json_encode([
-  			//"character_id"  => $id,
-  			//"proflang_name" => $new_proflang_name,
-  			//"proflang_id"   => mysqli_insert_id($conn)
-  			//]);
-		//If the connection is successful, redirect
-		header("Location: view_character.php?id=$id#proflang");
-  		die();
+		echo json_encode([
+			"character_id"  => $id,
+			"proflang_name" => $new_proflang_name,
+			"proflang_id"   => mysqli_insert_id($conn)
+			]);
+		$conn->close();
+		die();
 	}
 	//produce error message if something is wrong
 	else{
@@ -33,8 +32,8 @@ if (!empty($new_proflang_name)){
 
 
 //redirect
-//header("Location: view_character.php?id=$id#proflang");
-//die();
+header("Location: view_character.php?id=$id#proflang");
+die();
 
 $conn->close();
 ?>
