@@ -17,20 +17,20 @@ $chardata = mysql_query("SELECT * FROM character_sheet WHERE character_id = " . 
 $charinfo = mysql_fetch_array( $chardata );
 
 ?>
+
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_character.php?id=<?php Print $id;?>">Character</a>   
 </div>
-
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_story.php?id=<?php Print "".$id ."";?>">Backstory</a>   
 </div>
-
 <div id="MenuButton2" style="float:left;padding-right: 10px;">
 	<a>Spells</a>
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_settings.php?id=<?php Print "".$id ."";?>">Settings</a>
 </div>
+
 <p>&nbsp;</p>
 <h1><?php Print "".$charinfo['character_name'] . "'s Spells and Cantrips";?></h1>
 <form action="update_cantrips.php?id=<?php Print $id;?>" method="POST"> 

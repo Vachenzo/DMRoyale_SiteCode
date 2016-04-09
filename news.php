@@ -8,6 +8,8 @@ include_once 'includes/functions.php';
 <h1>Get the latest info on DMRoyale</h1>
 
 <?PHP 
+include 'news/04072016.php';
+echo "<div align='center'><img src='uploads/linebreak.png' height='25%' width='25%'></div>";
 include 'news/10092015.php';
 echo "<div align='center'><img src='uploads/linebreak.png' height='25%' width='25%'></div>";
 include 'news/09292015.php';

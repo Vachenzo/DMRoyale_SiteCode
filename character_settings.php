@@ -15,6 +15,7 @@ $data = mysql_query("SELECT * FROM character_sheet WHERE character_id = " . $id.
 $info = mysql_fetch_array( $data );
 
 ?>
+
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_character.php?id=<?php Print $id;?>">Character</a>   
 </div>
@@ -29,6 +30,7 @@ $info = mysql_fetch_array( $data );
 <div id="MenuButton2" style="float:left;padding-right: 10px;">
 	<a>Settings</a>
 </div>
+
 <p>&nbsp;</p>
 <h1><?php Print "".$info['character_name'] . ": Settings";?></h1>
 <form action="update_settings.php?id=<?php Print $id;?>" method="POST"> 
@@ -37,9 +39,6 @@ $info = mysql_fetch_array( $data );
 <h2>Campaign Code</h2>
 <p id='gray'>Add the campaign code given to you by your DM here. This will add your character to their campaign. DO NOT change this code unless switching campaigns.</p>
 <p>Campaign Code: <input type="text" name="campaign_code" id="campaign_code" value="<?php Print "".$info['campaign_code'] . "";?>" ></p>
-
-<h2>Print</h2>
-<p id='MenuButton'><a href="view_print.php?id=<?php Print "".$id ."";?>" target="_blank">Print Character Sheet</a></p>
 
 <h2>Delete Character</h2>
 <p id='Delete'>Done with this character?</br></br>

@@ -9,6 +9,7 @@ $chardata = mysql_query("SELECT * FROM character_sheet WHERE character_id = " . 
 	or die(mysql_error());
 $charinfo = mysql_fetch_array( $chardata );
 ?>
+
 <div id="MenuButton" style="float:left;padding-right: 10px;">
 	<a href="view_character.php?id=<?php Print $id;?>">Character</a>   
 </div>
@@ -18,46 +19,46 @@ $charinfo = mysql_fetch_array( $chardata );
 </div>
 
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_cantrips.php?id=<?php Print "".$id ."";?>">Spells</a>
+	<a href="view_cantrips.php?id=<?php Print $id ."";?>">Spells</a>
 </div>
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="view_settings.php?id=<?php Print "".$id ."";?>">Settings</a>
+	<a href="view_settings.php?id=<?php Print $id ."";?>">Settings</a>
 </div>
+
 <p>&nbsp;</p>
-<h1><?php Print "".$charinfo['character_name']."'s Backstory";?></h1>
+<h1><?php Print $charinfo['character_name']."'s Backstory";?></h1>
 
 <form action="update_story.php?id=<?php Print $id;?>" method="POST"> 
 <p id='gray'>Click "Update Character" to save changes.</p>
 <input type="submit" name='submit' value="Update Character" >
-	<h2>Physical Attributes</h2>
-	
+	<h2>Physical Attributes</h2>	
 	<table>
 		<tr>
 			<td>
 				Age</br>
-				<input type="text" name="age" id="age" value="<?php Print "".$info['age'] . "";?>" >
+				<input type="text" name="age" id="age" value="<?php Print $info['age'];?>" >
 			</td>
 			<td>
 				Height</br>
-				<input type="text" name="height" id="height" value="<?php Print "".$info['height']. "";?>" >
+				<input type="text" name="height" id="height" value="<?php Print $info['height']. "";?>" >
 			</td>
 			<td>
 				Weight</br>
-				<input type="text" name="weight" id="weight" value="<?php Print "".$info['weight']. "";?>" >
+				<input type="text" name="weight" id="weight" value="<?php Print $info['weight']. "";?>" >
 			</td>
 		</tr>
 		<tr>
 			<td>
 				Eye Color</br>
-				<input type="text" name="eyes" id="eyes" value="<?php Print "".$info['eyes'] . "";?>">
+				<input type="text" name="eyes" id="eyes" value="<?php Print $info['eyes'];?>">
 			</td>
 			<td>
 				Skin</br>
-				<input type="text" name="skin" id="skin" value="<?php Print "".$info['skin'] . "";?>" >
+				<input type="text" name="skin" id="skin" value="<?php Print $info['skin'];?>" >
 			</td>
 			<td>
 				Hair</br>
-				<input type="text" name="hair" id="hair" value="<?php Print "".$info['hair'] . "";?>" >
+				<input type="text" name="hair" id="hair" value="<?php Print $info['hair'];?>" >
 			</td>
 		</tr>
 		<tr>
@@ -67,61 +68,88 @@ $charinfo = mysql_fetch_array( $chardata );
 		</tr>
 	</table>
 	</br>
-	<h2>Character Traits</h2>
-	<table>
-		<tr>
-			<td>
-				Personality</br>
-				<textarea rows="10" cols="60" maxlength='2000' name="personality" id="personality" placeholder="Enter Text"><?php Print "".$info['personality'] . "";?></textarea>
-			</td>
-			<td>
-				Ideals</br>
-				<textarea rows="10" cols="60" maxlength='2000' name="ideals" id="ideals" placeholder="Enter Text"><?php Print "".$info['ideals'] . "";?></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Bonds</br>
-				<textarea rows="10" cols="60" maxlength='2000' name="bonds" id="bonds" placeholder="Enter Text"><?php Print "".$info['bonds'] . "";?></textarea>
-			</td>
-			<td>
-				Flaws</br>
-				<textarea rows="10" cols="60" maxlength='2000' name="flaws" id="flaws" placeholder="Enter Text"><?php Print "".$info['flaws'] . "";?></textarea>
-			</td>
-		</tr>
-	</table>
-	<h2>Backstory</h2>
-	<table>
-		<tr>
-			<td>				
-				<textarea rows="10" cols="124" maxlength='2000' name="backstory_text" id="backstory_text" placeholder="Enter Text"><?php Print "".$info['backstory_text'] . "";?></textarea>
-			</td>
-		</tr>
-	</table>
-	</br>
+
+<!--END ATTRIBUTES-->
+
+<!--BEGIN PARTY-->
+
 	<h2>Party</h2>
 	<ul>
-		<?php include 'get_party_CS.php';?>
+		<?php
+		$party_data = mysql_query("SELECT * FROM character_sheet WHERE campaign_code = '".$charinfo['campaign_code']."'")  
+			or die(mysql_error());
+			
+		while($campaign = mysql_fetch_array($party_data)) { 
+			$campaign_id = $campaign['character_id'];
+			$campaign_character_name = $campaign['character_name'];
+			?>			
+			<a href='readonly_view_character.php?id=<?PHP echo $campaign_id?>'><?PHP echo $campaign_character_name?></a></br>
+		<?PHP
+		}
+		?>
 	</ul>
-	<h2>Allies</h2>
-	<table>
-		<?php include 'get_ally.php';?>
-		<tr>
-			<td>
-				<input type="text" name="new_ally_name" id="new_ally_name"  size="40" placeholder="New Ally Name">
-			</td>
-			<td>
-				<input type="submit" name='submit' value="Add Ally" >
-			</td>
-		</tr>
-	</table>
 
+<!--END PARTY-->
+
+<!--BEGIN ALLIES-->
+
+	<h2>Allies</h2>
+	<?php
+		$inventory_data = mysql_query("SELECT * FROM allies WHERE character_id = ".$id." ORDER BY ally_name")  
+			or die(mysql_error());
+
+		while($ally = mysql_fetch_array($inventory_data)) { 
+			
+			$DBName = $ally['ally_name'];
+			$ally_name =  htmlspecialchars($DBName, ENT_QUOTES);
+			$ally_id = $ally['ally_id'];
+			$DBName2 = $ally['notes'];
+			$ally_notes =  htmlspecialchars($DBName2, ENT_QUOTES);
+			$update_url = "delete_ally.php?id=$id&ally=$ally_id";
+		?>
+		
+			<div class='FloatDiv'><input type='text' name='ally_name[]' size='40' value='<?PHP echo $ally_name ?>' REQUIRED></div>
+			<div class='FloatDiv'><input type='text' name='notes[]' size='60' placeholder='Notes' value='<?PHP echo $ally_notes ?>'></div>
+			<div id='Delete' class='FloatDiv'><input type='hidden' name='ally_id[]' value='<?PHP echo $ally_id ?>'>
+			<a href='delete_ally.php?id=<?PHP echo $id ?>&&ally=<?PHP echo $ally_id ?>'>Delete?</a></div></br></br>
+			
+		<?PHP
+		}
+		?>
+		<div class='FloatDiv'><input type="text" name="new_ally_name" size="40" placeholder="New Ally Name"></div>
+		<div class='FloatDiv'><input type="submit" name='submit' value="Add Ally" ></div>
+		</br>
+		</br>	
+<!--END ALLIES-->
+
+<!--BEGIN TRAITS-->
+
+	<h2>Character Traits</h2>
+	<div style='padding-left:5px;'>
+		Personality</br>
+		<textarea rows="10" maxlength='2000' name="personality" placeholder="Enter Text"><?php Print $info['personality'];?></textarea></br>
+		Ideals</br>
+		<textarea rows="10" maxlength='2000' name="ideals" placeholder="Enter Text"><?php Print $info['ideals'];?></textarea></br>
+		Bonds</br>
+		<textarea rows="10" maxlength='2000'  name="bonds" placeholder="Enter Text"><?php Print $info['bonds'];?></textarea></br>
+		Flaws</br>
+		<textarea rows="10" maxlength='2000' name="flaws" placeholder="Enter Text"><?php Print $info['flaws'];?></textarea>
+	</div>
+	</br>
+	</br>
 	
+<!--END TRAITS-->
+
+<!--BEGIN BACKSTORY-->
+
+	<h2>Backstory</h2>
+	<div style='padding-left:5px;'>
+		<textarea rows="10" maxlength='2000' name="backstory_text" placeholder="Enter Text"><?php Print $info['backstory_text'];?></textarea>
+	</div>
+	</br>
+	
+<!--END BACKSTORY-->
+
+
 	<input type="submit" name='submit' value="Update Character" >
 </form>
-	
-<script>
-	function updatenotice() {
-		alert("Character Information Updated");
-	}
-</script>

@@ -19,7 +19,7 @@ else {}
 ?>     
 
 <h3>DM Royale is an online character sheet and campaign manager for Dungeons & Dragons 5th edition. </h3>
-<p>It has been designed to be fast and flexible, allowing for quick character updates, making character information easier to share and access than ever.</p>
+<p>It has been designed to be fast and flexible, allowing for quick character updates, making character information easier to share and access than ever. This site is currently in it's ALPHA phase of development. Expect frequent updates and changes to functionality as new and existing systems are continuously developed.</p>
 <table >
 	<tr>
 		<td>
