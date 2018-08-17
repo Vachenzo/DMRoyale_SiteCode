@@ -1,10 +1,19 @@
 <?php
-$inventory_data = mysql_query("SELECT * FROM allies WHERE character_id = ".$id." ORDER BY ally_name")  
-	or die(mysql_error());
-while($ally = mysql_fetch_array($inventory_data)) { 
-	$ally_name = $ally['ally_name'];
-	$ally_id = $ally['ally_id'];
-	$update_url = "delete_ally.php?id=$id&ally=$ally_id";
-	echo "<tr><td><input type='text' name='ally_name[]' id='ally_name' size='40' value='".$ally_name."' disabled></td></tr>\n";
-}
-?>
+		$inventory_data = mysql_query("SELECT * FROM allies WHERE character_id = ".$id." ORDER BY ally_name")  
+			or die(mysql_error());
+
+		while($ally = mysql_fetch_array($inventory_data)) { 
+			
+			$DBName = $ally['ally_name'];
+			$ally_name =  htmlspecialchars($DBName, ENT_QUOTES);
+			$ally_id = $ally['ally_id'];
+			$DBName2 = $ally['notes'];
+			$ally_notes =  htmlspecialchars($DBName2, ENT_QUOTES);
+			$update_url = "delete_ally.php?id=$id&ally=$ally_id";
+		?>
+		
+			<li><b><?PHP print $ally_name ?>:</b> <?PHP print $ally_notes ?></li>
+			
+		<?PHP
+		}
+		?>

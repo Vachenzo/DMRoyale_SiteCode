@@ -139,3 +139,4 @@
 [07-Oct-2015 18:30:19 America/New_York] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /home/dmroyale/public_html/includes/db_connect.php:3) in /home/dmroyale/public_html/includes/functions.php on line 23
 [07-Oct-2015 18:30:19 America/New_York] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/dmroyale/public_html/includes/db_connect.php:3) in /home/dmroyale/public_html/includes/functions.php on line 23
 [07-Oct-2015 18:30:19 America/New_York] PHP Warning:  session_regenerate_id(): Cannot regenerate session id - headers already sent in /home/dmroyale/public_html/includes/functions.php on line 24
+[23-Feb-2017 00:02:33 America/New_York] PHP Warning:  mysql_connect(): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) in /home/dmroyale/public_html/includes/connections.php on line 9

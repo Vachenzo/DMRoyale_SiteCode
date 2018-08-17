@@ -1,15 +1,18 @@
 <?php
-$inventory_data = mysql_query("SELECT * FROM items WHERE character_id = " . $id)  
-	or die(mysql_error());
-while($item = mysql_fetch_array($inventory_data)) { 
-	$item_name = $item['item_name'];
-	$item_count = $item['item_count'];
-	$item_weight= $item['item_weight'];
-	$item_id = $item['item_id'];	
-	$update_url = "delete_item.php?id=$id&item=$item_id";
-	echo "<tr><td><input  disabled type='number' name='inv_item_count[]' id='inv_item_count' style='width:110px'  value='".$item_count."' REQUIRED></td>\n";
-	echo "<td><input  disabled type='text' name='inv_item_name[]' id='inv_item_name' size='40' value='".$item_name."' REQUIRED></td>\n";
-	echo "<td><input  disabled type='text' name='inv_item_weight[]' id='inv_item_weight' size='10' value='".$item_weight."'></td>\n";
-	echo "</tr>\n";
-}
-?>
+		//Run query to get inventory
+		$inventory_data = mysql_query("SELECT * FROM items WHERE character_id = ".$id)  
+		or die(mysql_error());
+		// iterate through each item
+		while($item = mysql_fetch_array($inventory_data)) { 
+		//make sure the name contains [] to signify it's in the array
+		?>
+		<tr>	
+			<td><?PHP echo $item['item_count']; ?></td>
+			<td><?PHP print $item['item_name']; ?></td>
+			<td><?PHP print $item['item_weight']; ?></td>
+		</tr>
+		<?php 
+		//close the PHP WHILE statement
+		} 
+		//then add in the new item code below
+		?>	

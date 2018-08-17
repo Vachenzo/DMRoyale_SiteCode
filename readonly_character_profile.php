@@ -11,199 +11,151 @@ $info = mysql_fetch_array( $data );
 </div>
 
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="readonly_view_story.php?id=<?php Print "".$id ."";?>">Backstory</a>   
+	<a href="readonly_view_story.php?id=<?php Print $id ."";?>">Backstory</a>   
 </div>
 
 <div id="MenuButton" style="float:left;padding-right: 10px;">
-	<a href="readonly_view_cantrips.php?id=<?php Print "".$id ."";?>">Spells</a>
+	<a href="readonly_view_cantrips.php?id=<?php Print $id ."";?>">Spells</a>
 </div>
 <p>&nbsp;</p>
-<h1><?php Print "".$info['character_name'] . "'s Character Sheet";?></h1>
- 
-	Player Name:</br>
-				<input type="hidden" name="playername" id="playername" value="<?php Print "".$info['player_name'] . "";?>">
-				<?php Print "".$info['player_name'] . "";?>
-	<table>
-		<tr>
+<h1><?php Print $info['character_name']."'s Character Sheet";?></h1>
+ 	<p><b>Player:</b>
+	<?php Print $info['player_name'];?></p>
+	<p><b>Character Name:</b>
+	<?php Print $info['character_name'];?></p>
+	<p><b>Level:</b>
+	<?php Print $info['level'];?></p>
+	<p><b>Armor Class:</b>
+	<?php Print $info['armor'];?></p>
+	<p><b>Speed:</b>
+	<?php Print $info['speed'];?></p>
+	<p><b>Initiative:</b>
+	<?php Print $info['initiative'];?></p>
+	<p><b>Experience:</b>
+	<?php Print $info['experience'];?></p>
+	<p><b>Inspiration:</b>
+	<?php Print $info['inspiration'];?></p>
+	<p><b>Class:</b>
+	<?php Print $info['class_level'];?></p>
+	<p><b>Background:</b>
+	<?php Print $info['background'];?></p>
+	<p><b>Race:</b>
+	<?php Print $info['race'];?></p>
+	<p><b>Alignment:</b>
+	<?php Print $info['alignment'];?></p>
+	<p><b>Max HP:</b>
+	<?php Print $info['max_hp'];?></p>
+	<p><b>Current HP:</b>
+	<?php Print $info['current_hp'];?></p>
+	<p><b>Hit Dice:</b>
+	<?php Print $info['hit_dice'];?></p>
+	<p><b>Death Save Successes:</b>
+	<?php Print $info['death_success'];?></p>
+	<p><b>Death Save Failures:</b>
+	<?php Print $info['death_fail'];?></p>
+	<p><b>Initiative:</b>
+	<?php 
+	if ($info['campaign_code'] != null){
+	echo $info['initiative'] ;	
+	}
+	else{
+		$dex= $info['dex_skill'];
+		$dexSub = $dex - 10;
+		$dexSubDiv = $dexSub / 2;
+		$floorDex= floor($dexSubDiv);
+		$dexNumber = sprintf("%+.0f",$floorDex);
+		echo $info['initiative'] + $floorDex;
+	}
+	?>
 
-			<td>
-				Character Name:</br>
-				<input disabled type="text" name="charactername" id="charactername" value="<?php Print "".$info['character_name'] . "";?>">
-			</td>
-			<td>
-				Level:</br>
-				<input  disabled type="number" name="level" id="level" value="<?php Print "".$info['level'] . "";?>" required>
-			</td>
-			<td>
-				Experience:</br>
-				<input  disabled type="number" name="experience" id="experience" value="<?php Print "".$info['experience'] . "";?>" required>
-			</td>
-			<td>
-				Inspiration:</br>
-				<input disabled  type="number" name="inspiration" id="inspiration" value="<?php Print "".$info['inspiration'] . "";?>" required>
-			</td>
-			
-		</tr>
-		<tr>
-			<td>
-				Class:</br>
-				<input  disabled type="text" name="classlevel" id="classlevel" value="<?php Print "".$info['class_level'] . "";?>" required>
-			</td>
-			<td>
-				Background:</br>
-				<input disabled  type="text" name="background" id="background" value="<?php Print "".$info['background'] . "";?>" required>
-			</td>
-			<td>
-				Race:</br>
-				<input disabled  type="text" name="race" id="race" value="<?php Print "".$info['race'] . "";?>">
-			</td>
-			<td>
-				Alignment:</br>
-				<input  disabled type="text" name="alignment" id="alignment" value="<?php Print "".$info['alignment'] . "";?>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Max HP</br>
-				<input  disabled type="number" name="max_hp" id="max_hp" value="<?php Print "".$info['max_hp'] . "";?>" required>
-			</td>
-			<td>
-				Current HP</br>
-				<input  disabled type="number" name="current_hp" id="current_hp" value="<?php Print "".$info['current_hp'] . "";?>" required>
-			</td>
-			<td>
-				Hit Dice</br>
-				<input  disabled type="text" name="hit_dice" id="hit_dice" value="<?php Print "".$info['hit_dice'] . "";?>" required>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Death Save Successes:</br>
-				<select  disabled name="death_success" id="death_success">
-					<option value="<?php Print "".$info['death_success'] . "";?>"><?php Print "".$info['death_success'] . "";?></option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-			</td>
-			<td>
-				Death Save Failures:</br>
-				<select  disabled name="death_fail" id="death_fail">
-					<option value="<?php Print "".$info['death_fail'] . "";?>"><?php Print "".$info['death_fail'] . "";?></option>
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Armor Class</br>
-				<input  disabled type="number" name="armor" id="armor" value="<?php Print "".$info['armor'] . "";?>" required>
-			</td>
-			<td>
-				Speed</br>
-				<input disabled  type="number" name="speed" id="speed" value="<?php Print "".$info['speed'] . "";?>" required>
-			</td>
-			<td>
-				Initiative:</br>
-				<input  disabled type="number" name="initiative" id="initiative" value="<?php Print "".$info['initiative'] . "";?>" >
-			</td>
-		</tr>
-		<tr>
-			
-		</tr>
-	</table>
 	<h2>Skills</h2>
 	<table>
 		<tr>
 			<td>
-				Strength:</br>
-				<input disabled  type="number" name="str_skill" id="str_skill" required style="width:110px" value="<?php Print "".$info['str_skill'] . "";?>">
+				<b>Strength:</b> <?php Print $info['str_skill'];?>
 			</td>
 			<td>
-				Dexterity:</br>
-				<input disabled  type="number" name="dex_skill" id="dex_skill" required style="width:110px" value="<?php Print "".$info['dex_skill'] . "";?>">
+				<b>Dexterity:</b> <?php Print $info['dex_skill'];?>
 			</td>
 			<td>
-				Constitution:</br>
-				<input disabled  type="number" name="con_skill" id="con_skill" required style="width:110px" value="<?php Print "".$info['con_skill'] . "";?>">
+				<b>Constitution:</b> <?php Print $info['con_skill'];?>
 			</td>
 			<td>
-				Intelligence:</br>
-				<input disabled  type="number" name="int_skill" id="int_skill" required style="width:110px" value="<?php Print "".$info['int_skill'] . "";?>">
+				<b>Intelligence:</b><?php Print $info['int_skill'];?>
 			</td>
 			<td>
-				Wisdom:</br>
-				<input disabled  type="number" name="wis_skill" id="wis_skill" required style="width:110px" value="<?php Print "".$info['wis_skill'] . "";?>">
+				<b>Wisdom:</b> <?php Print $info['wis_skill'];?>
 			</td>
 			<td>
-				Charisma:</br>
-				<input disabled  type="number" name="chr_skill" id="chr_skill" required style="width:110px" value="<?php Print "".$info['chr_skill'] . "";?>">
+				<b>Charisma:</b> <?php Print $info['chr_skill'];?>
 			</td>
 		</tr>
 		<tr>
 			<td>
+				<b>Str Modifier:</b>
 				<?php
 					$str = $info['str_skill'];
 					$strSub = $str - 10;
 					$strSubDiv = $strSub / 2;
 					$floorStr = floor($strSubDiv);
 					$strNumber = sprintf("%+.0f",$floorStr);
-					echo("Str Modifier: <b>".$strNumber."</b>");
+					echo $strNumber;
 				?>
 			</td>
 			<td>
+				<b>Dex Modifier: </b>
 				<?php
 					$dex= $info['dex_skill'];
 					$dexSub = $dex - 10;
 					$dexSubDiv = $dexSub / 2;
 					$floorDex= floor($dexSubDiv);
 					$dexNumber = sprintf("%+.0f",$floorDex);
-					echo("Dex Modifier: <b>".$dexNumber."</b>");
+					echo $dexNumber;
 				?>
 			</td>
 			<td>
+				<b>Con Modifier: </b>
 				<?php
 					$con = $info['con_skill'];
 					$conSub = $con - 10;
 					$conSubDiv = $conSub / 2;
 					$floorCon = floor($conSubDiv);
 					$conNumber = sprintf("%+.0f",$floorCon);
-					echo("Con Modifier: <b>".$conNumber."</b>");
+					echo $conNumber;
 				?>
 			</td>
 			<td>
+				<b>Int Modifier: </b>
 				<?php
 					$int= $info['int_skill'];
 					$intSub = $int - 10;
 					$intSubDiv = $intSub / 2;
 					$floorInt= floor($intSubDiv);
 					$intNumber = sprintf("%+.0f",$floorInt);
-					echo("Int Modifier: <b>".$intNumber."</b>");
+					echo $intNumber;
 				?>
 			</td>
 			<td>
+				<b>Wis Modifier: </b>
 				<?php
 					$wis = $info['wis_skill'];
 					$wisSub = $wis - 10;
 					$wisSubDiv = $wisSub / 2;
 					$floorWis = floor($wisSubDiv);
 					$wisNumber = sprintf("%+.0f",$floorWis);
-					echo("Wis Modifier: <b>".$wisNumber."</b>");
+					echo $wisNumber;
 					
 				?>
 			</td>
 			<td>
+				<b>Chr Modifier: </b>
 				<?php
 					$chr= $info['chr_skill'];
 					$chrSub = $chr - 10;
 					$chrSubDiv = $chrSub / 2;
 					$floorChr= floor($chrSubDiv);
 					$chrNumber = sprintf("%+.0f",$floorChr);
-					echo("Chr Modifier: <b>".$chrNumber."</b></br>");
+					echo $chrNumber;
 				?>
 			</td>
 		</tr>
@@ -293,57 +245,40 @@ $info = mysql_fetch_array( $data );
 	<table>
 		<tr>
 			<td>
-					Name
+					<b>Attack Name:</b>
 			</td>
 			<td>
-					Attack Bonus
+					<b>Attack Bonus:</b>
 			</td>
 			<td>
-					Damage/Type
+					<b>Damage/Type:</b>
+			</td>
+			<td>
+					<b>Description:</b>
 			</td>
 		</tr>
 		<?php include 'readonly_get_attack.php';?>
 	</table>
 	<h2>Currency</h2>
-	<table>
-		<tr>
-			<td>
-				SP:</br>
-				<input disabled  type="number" name="sp" id="sp" required style="width:110px" value="<?php Print "".$info['sp_count'] . "";?>">
-			</td>
-			<td>
-				CP:</br>
-				<input disabled  type="number" name="cp" id="cp" required style="width:110px" value="<?php Print "".$info['cp_count'] . "";?>">
-			</td>
-			<td>
-				EP:</br>
-				<input disabled  type="number" name="ep" id="ep" required style="width:110px" value="<?php Print "".$info['ep_count'] . "";?>">
-			</td>
-			<td>
-				GP:</br>
-				<input disabled  type="number" name="gp" id="gp" required style="width:110px" value="<?php Print "".$info['gp_count'] . "";?>">
-			</td>
-			<td>
-				PP:</br>
-				<input disabled  type="number" name="pp" id="pp" required style="width:110px" value="<?php Print "".$info['pp_count'] . "";?>">
-			</td>
-			<td>
-				
-			</td>
-		</tr>
-	</table>
+	<b>SP:</b> <?php Print $info['sp_count'];?></br>
+	<b>CP:</b> <?php Print $info['cp_count'];?></br>
+	<b>EP:</b> <?php Print $info['ep_count'];?></br>
+	<b>GP:</b> <?php Print $info['gp_count'];?></br>
+	<b>PP:</b> <?php Print $info['pp_count'];?></br>
 	</br>
 	<h2>Inventory</h2>
 	<table>
 		<tr>
 			<td>
-				Item Count:
+					<b>Quantity:</b>
 			</td>
 			<td>
-				Item Name:
+					<b>Item Name:</b>
+			</td>
+			<td>
+					<b>Weight:</b>
 			</td>
 		</tr>
 		<?php include 'readonly_get_item.php';?>
-		
 	</table>
 	</br>

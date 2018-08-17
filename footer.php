@@ -1,3 +1,12 @@
+				<div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- Footer -->
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:728px;height:90px"
+					 data-ad-client="ca-pub-1407699437750890"
+					 data-ad-slot="9640633333"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script></div>
 				<div id="gray">
 					<p>&nbsp;</p>
 					<p>This website is not affiliated, endorsed, or sponsored by Wizards of the Coast® or Hasbro®. Dungeons & Dragons®, and D&D® are registered trademarks of Wizards of the Coast®.</p>

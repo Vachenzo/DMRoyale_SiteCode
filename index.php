@@ -19,7 +19,7 @@ else {}
 ?>     
 
 <h3>DM Royale is an online character sheet and campaign manager for Dungeons & Dragons 5th edition. </h3>
-<p>It has been designed to be fast and flexible, allowing for quick character updates, making character information easier to share and access than ever. This site is currently in it's ALPHA phase of development. Expect frequent updates and changes to functionality as new and existing systems are continuously developed.</p>
+<p>It has been designed to be fast and flexible, allowing for quick character updates, making character information easier to share and access than ever. </p>
 <table >
 	<tr>
 		<td>
@@ -30,7 +30,7 @@ else {}
 		else {
 			}
 		?>   
-			<p align="center"><img src="uploads/d20.png" height="25%" width="25%"></p>
+			<p align="center"><img src="images/d20.png" height="25%" width="25%"></p>
 		</td>
 		<td><?php
         if (login_check($mysqli) == true) {
@@ -39,7 +39,7 @@ else {}
 		else {
 			}
 		?>   
-			<p align="center"><img src="uploads/pencil.png" height="25%" width="25%"></p>
+			<p align="center"><img src="images/pencil.png" height="25%" width="25%"></p>
 		</td>
 	</tr>
 		<tr>
@@ -51,4 +51,14 @@ else {}
 		</td>
 	</tr>
 </table> 
+<h1>Here's the latest news from DMRoyale</h1>
+<?PHP 
+include 'news/10142016.php';
+echo "<div align='center'><img src='images/linebreak.png' height='25%' width='25%'></div>";
+include 'news/10132016.php';
+echo "<div align='center'><img src='images/linebreak.png' height='25%' width='25%'></div>";
+include 'news/09222016.php';
+echo "<div align='center'><img src='images/linebreak.png' height='25%' width='25%'></div>";
+?>
+
 <?PHP include 'footer.php'?>

@@ -46,8 +46,11 @@ while($row2=mysql_fetch_array($result2)){
 	echo "<ul>\n"; 
 	echo "<li>" . "<a href=\"view_campaign.php?id=$campaign_id\">"  .$campaignname . "</a></li>\n";
 	echo "</ul>";
-}
-else : ?>
+}?>
+
+
+
+<? else : ?>
 <p>
 <span class="error">You are not authorized to access this page.</span> Please <a href="index.php">login</a>.
 </p>

@@ -1,20 +1,5 @@
-textarea{
-	width:95%;
-    resize:none;
-}
-
-body { background-color: #eeeeee; 
-        color: #000000; 
-		font-family: 'Roboto', sans-serif;
-		font-size: 10pt;
-		height: 100%
-} 
 table {
 	border:0px;	
-}
-
-hr{
-	color: #ffffff;
 }
 
 td{
@@ -24,7 +9,37 @@ td{
 	padding: 5px 5px 5px 5px;
 }
 
-textarea { resize: none; }
+textarea{
+	width:95%;
+    resize:none;
+}
+
+
+body { background-color: #eeeeee; 
+        color: #000000; 
+		font-family: 'Roboto', sans-serif;
+		font-size: 10pt;
+		height: 100%
+} 
+
+hr{
+	color: #ffffff;
+}
+
+h1{
+	font-weight: 300;
+}
+h2{
+	font-weight: 300;
+}
+
+h3{
+	font-weight: 300;
+}
+
+h4{
+	font-weight: 300;
+}
 
 input {
 
@@ -47,38 +62,36 @@ input[type=button]{
 }
 
 input[type=button]:hover{
-background-color: #1976D2;
+	background-color: #1976D2;
 }
-	
-#wrapper { 
-		background-color: #ffffff;
-		margin-left:auto;
-		margin-right:auto;
-		width: 960px;
-		box-shadow: 2px 2px 5px #dddddd;
-		padding: 5px;
-
-		
-}  
 
 ul  li{ 
-			list-style-type:none; 
-		} 
+	list-style-type:none; 
+} 
+	
+#wrapper { 
+	background-color: #ffffff;
+	margin-left:auto;
+	margin-right:auto;
+	width: 960px;
+	box-shadow: 2px 2px 5px #dddddd;
+	padding: 5px;
+}  
 
 #header{
-		background-color: #2196F3;
-		background-image: url("uploads/headerDragon.png");
-		padding: 5px;
-		box-shadow: 0px 2px 5px #999999;
-		background-repeat: no-repeat;
-		background-position:680px -10px;
+	background-color: #2196F3;
+	background-image: url("images/headerDragon.png");
+	padding: 5px;
+	box-shadow: 0px 2px 5px #999999;
+	background-repeat: no-repeat;
+	background-position:680px -10px;
 }
 
-#title h1{
+#h2bar{
+	background-color: #2196F3;
+	padding: 2px;
+	box-shadow: 0px 2px 5px #999999;
 	color: #ffffff;
-	font-size: 32px;
-	font-weight: 200;
-
 }
 
 #title a {
@@ -87,23 +100,15 @@ ul  li{
 	background-color: #2196F3;
 	color: #fff;
 	text-decoration: none;
-
 }
 
-h1{
-	font-weight: 300;
-}
-h2{
-	font-weight: 300;
-}
-
-h3{
-	font-weight: 300;
+#title h1{
+	color: #ffffff;
+	font-size: 32px;
+	font-weight: 200;
 }
 
-h4{
-	font-weight: 300;
-}
+
 #logo {   
        border-bottom: 0px solid #000000; 
        padding:10px; 
@@ -233,6 +238,7 @@ background-color: #2196F3;
 }
 
 .FloatDiv{
+	
 	padding-left : 5px;
 	float: left;
 }
@@ -241,3 +247,31 @@ background-color: #2196F3;
 	position: fixed;
     top: 20px;
 }
+
+div.img {
+	margin: 5px;
+	float: left;
+	width: 180px;
+	
+}
+
+div.img img {
+	width: 100%;
+
+}
+
+div.desc {
+	padding: 15px;
+	text-align: center;
+}
+
+
+.photo {
+	background-size: 100%;
+    padding: 250px 0 0 0;
+    display: block;
+    background-repeat: no-repeat;
+
+}
+
+

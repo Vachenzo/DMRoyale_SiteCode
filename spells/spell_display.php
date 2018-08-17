@@ -1,7 +1,39 @@
-<tr><td><input type='number' name='cantrip_level[]' id='cantrip_level' style='width:113px' value='<?PHP echo $cantrip_level;?>' REQUIRED></td>
-<td><input type='text' name='cantrip_name[]' id='cantrip_name' size='40' value='<?PHP echo $cantrip_name;?>' REQUIRED placeholder='Spell Name'></br>
-<input type='text' name='spell_range[]' id='spell_range' size='12' maxlength='10' svalue='<?PHP echo $spell_range;?>' placeholder='Range'></td>
-<td><textarea rows='3' cols='100' maxlength='1600' name='description[]' id='description' placeholder='Add a Description'><?PHP echo $description;?></textarea>
-<input type='hidden' name='cantrip_id[]' id='cantrip_id' value='<?PHP echo $cantrip_id?>'></td>
-<td  id='Delete' ></br><a href='delete_cantrip.php?id=<?PHP echo $id;?>&cantrip=<?PHP echo $cantrip_id;?>'>Delete?</a></td>
-</tr>
+<?PHP
+$spell_display = mysql_query("SELECT * FROM spell_list WHERE spell_index = ".$spell_list_id." ORDER BY name")  
+	or die(mysql_error());
+	
+while($spell_info = mysql_fetch_array($spell_display)) {
+	?>
+	
+	<h3><? echo $spell_info['name'];?></h3>
+	<b>Spell School:</b> <? echo $spell_info['spell_school'];?></br>
+	<b>Casting Time:</b> <? echo $spell_info['casting_time'];?></br>
+	<b>Range:</b> <? echo $spell_info['range'];?></br>
+	<b>Components:</b> <? echo $spell_info['v'];?> <? echo $spell_info['s'];?> <? echo $spell_info['m'];?> - <?echo $spell_info['m_components'];?>
+	
+	
+	</br>
+	<b>Duration:</b> <? echo $spell_info['duration'];?></br>
+	<p><? echo nl2br($spell_info['description']);?></p>
+	</p><? echo $spell_info['upgrade'];?></p>
+	<div  id='Delete' ></br><a href='delete_spell.php?id=<?PHP echo $id;?>&spell=<?PHP echo $cantrip['spell_list_id'];?>'>Remove <? echo $spell_info['name'];?>?</a></div>	
+<?}
+?>
+
+<?PHP
+$custom_spell_display = mysql_query("SELECT * FROM pc_custom_spell WHERE spell_index = ".$spell_list_id." ORDER BY name")  
+	or die(mysql_error());
+	
+while($spell_info2 = mysql_fetch_array($custom_spell_display)) {
+	?>
+	
+	<h3><? echo $spell_info2['name'];?> (Custom Spell)</h3>
+	<b>Spell School:</b> <? echo $spell_info2['spell_school'];?></br>
+	<b>Casting Time:</b> <? echo $spell_info2['casting_time'];?></br>
+	<b>Range:</b> <? echo $spell_info2['spell_range'];?></br>
+	<b>Components:</b> <? echo $spell_info2['v'];?> <? echo $spell_info2['s'];?> <? echo $spell_info2['m'];?> - <? echo $spell_info2['materials'];?></br>
+	<b>Duration:</b> <? echo $spell_info2['duration'];?></br>
+	<p><? echo nl2br($spell_info2['description']);?></p>
+	<div  id='Delete' ></br><a href='delete_spell.php?id=<?PHP echo $id;?>&spell=<?PHP echo $cantrip['spell_list_id'];?>'>Remove <? echo $spell_info2['name'];?>?</a></div>	
+<?}
+?>

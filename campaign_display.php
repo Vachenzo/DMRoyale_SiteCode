@@ -8,6 +8,8 @@ $data = mysql_query("SELECT * FROM campaign WHERE dungeonmaster = '".$_SESSION['
 // puts the "db" info into the $info array  
 $info = mysql_fetch_array( $data );
 
+$dungeonkey = $info['dungeonkey'];
+
 
 ?>
 <h1><?php Print "".$info['dungeonmaster']."";?>'s  <?php Print "".$info['campaignname']."";?> Campaign</h1>
@@ -45,17 +47,25 @@ $info = mysql_fetch_array( $data );
 			</td>
 		</tr>
 	</table>	
-	</br>
-	</br>	
-	<input type="submit" name='submit' value="Update Campaign" >
-	<script type="text/javascript">
-		function AlertIt() {
-		var answer = confirm ("Are you sure you want to delete <?php Print $info['campaignname'];?>?")
-		if (answer)
-		window.location="delete_campaign.php?id=<?php Print $id;?>";
-		}
-	</script>
-	<div id="Delete" style="float:right;padding-right: 10px;">
-		<a href="javascript:AlertIt();">Delete Campaign?</a>   
-	</div>
+<h2>Custom Campaign Spells</h2></br>
+<div id="MenuButton" style="float:left;padding-right: 10px;">
+	<a href="add_spell_campaign.php?id=<?php Print $id;?>">Create Custom Spell</a>
+</div></br>
+<? 
+include 'spell_display_campaign.php';?>
+</br>
+</br>
+</br>
+</br>	
+<input type="submit" name='submit' value="Update Campaign" >
+<script type="text/javascript">
+	function AlertIt() {
+	var answer = confirm ("Are you sure you want to delete <?php Print $info['campaignname'];?>?")
+	if (answer)
+	window.location="delete_campaign.php?id=<?php Print $id;?>";
+	}
+</script>
+<div id="Delete" style="float:right;padding-right: 10px;">
+	<a href="javascript:AlertIt();">Delete Campaign?</a>   
+</div>
 </form>

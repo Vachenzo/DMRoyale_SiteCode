@@ -6,7 +6,7 @@ sec_session_start();
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<link rel="icon" type="image/ico" href="uploads/rook-chess-piece.ico">
+	<link rel="icon" type="image/ico" href="images/rook-chess-piece.ico">
 	<meta charset="utf-8">
 	  <meta name="author" content="Created by Ryan Vachon">
 	   <meta name="description" content="DM Royale is an online Dungeons & Dragons 5e character sheet and campaign manager. The online character sheet is fast, flexible and intuitive. The campaign manager provides party stats and quick links to party member's character sheets. DM Royale is not affiliated with Wizards of the Coast or Hasbro.">
@@ -25,9 +25,37 @@ sec_session_start();
 		</script>
 	</head>
 	<body>
+		<!-- Adsense Ad box -->
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1407699437750890",
+    enable_page_level_ads: true
+  });
+</script>
+		<!-- end Adsense Ad box-->
+		<!-- Project Wonderful Ad Box Loader -->
+		<script type="text/javascript">
+		   (function(){function pw_load(){
+			  if(arguments.callee.z)return;else arguments.callee.z=true;
+			  var d=document;var s=d.createElement('script');
+			  var x=d.getElementsByTagName('script')[0];
+			  s.type='text/javascript';s.async=true;
+			  s.src='//www.projectwonderful.com/pwa.js';
+			  x.parentNode.insertBefore(s,x);}
+		   if (window.attachEvent){
+			window.attachEvent('DOMContentLoaded',pw_load);
+			window.attachEvent('onload',pw_load);}
+		   else{
+			window.addEventListener('DOMContentLoaded',pw_load,false);
+			window.addEventListener('load',pw_load,false);}})();
+		</script>
+		<!-- End Project Wonderful Ad Box Loader -->
+		
 		<div id="wrapper">
 			<div id="header">
 				<div id="title" align="left"><h1><a href="index.php">DM Royale</a></h1>
+				
 				<h3 style="color:white;"> The Online D&D 5e Character Sheet</h3></div>			
 				 <?php if (login_check($mysqli) == true) : ?>
 					<div id="MenuButton">	
@@ -42,8 +70,7 @@ sec_session_start();
 						<tr>
 							<td><?php  include 'includes/login.php';?></td>
 							<td><div id="MenuButton">
-								<a href='register.php'>Register</a>
-								<a href="search.php">Search Characters</a>	
+								<a href='register.php'>Register</a>	
 								<a href="news.php">News</a>								
 								</div>
 							</td>
@@ -51,4 +78,19 @@ sec_session_start();
 					</table>
 				<?php endif; ?>
 			</div>
-			</br>			
+			
+			</br>
+<div align="center">			
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- Header -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:728px;height:90px"
+				 data-ad-client="ca-pub-1407699437750890"
+				 data-ad-slot="3630469190"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			</br>
+</div>
+
+			

@@ -36,9 +36,8 @@ $info = mysql_fetch_array( $data );
 <div id='update-data' style="position: fixed;"></div>
 
 <!--Remove when autoupdate is functional-->
-<p id='gray'>Click "Update Character" to save changes.</p>
 <form action="update.php?id=<?php Print $id;?>" method="POST"> 
-	<input type="submit" name='submit' value="Update Character" ></br></br>
+	<input type="submit" name='submit' align='right' value="Save Character" ></br></br>
 		<table>
 			<tr>
 				<td>
@@ -79,15 +78,15 @@ $info = mysql_fetch_array( $data );
 			</tr>
 			<tr>
 				<td>
-					Max HP</br>
+					Max HP:</br>
 					<input type="number" name="max_hp" id="max_hp" value="<?php Print $info['max_hp'] ;?>" required>
 				</td>
 				<td>
-					Current HP</br>
+					Current HP:</br>
 					<input type="number" name="current_hp" id="current_hp" value="<?php Print $info['current_hp'] ;?>" required>
 				</td>
 				<td>
-					Hit Dice</br>
+					Hit Dice:</br>
 					<input type="text" name="hit_dice" id="hit_dice" value="<?php Print $info['hit_dice'] ;?>" >
 				</td>
 			</tr>
@@ -115,23 +114,56 @@ $info = mysql_fetch_array( $data );
 			</tr>
 			<tr>
 				<td>
-					Armor Class</br>
+					Armor Class:</br>
 					<input type="number" name="armor" id="armor" value="<?php Print $info['armor'] ;?>" required>
 				</td>
 				<td>
-					Speed</br>
+					Speed:</br>
 					<input type="number" name="speed" id="speed" value="<?php Print $info['speed'] ;?>" required>
 				</td>
-				<td>
-					Initiative:</br>
-					<b><?php Print $info['initiative'] ;?></b>
+				<td>					
+					<?php 
+					
+					if ($info['campaign_code'] != null){
+						?>
+						Initiative:</br>
+						<? echo $info['initiative'] ;?>
+						<input type='hidden' name='initiative' id='initiative' value='<? echo $info['initiative'];?>'>
+						<?
+					}
+					else{
+						?>
+						Calculated Initiative:</br>
+						Roll: <input type='text' name='initiative' id='initiative' size='2' maxlength='2' value='<? echo $info['initiative'];?>'> 
+						<?
+						$dex= $info['dex_skill'];
+						$dexSub = $dex - 10;
+						$dexSubDiv = $dexSub / 2;
+						$floorDex= floor($dexSubDiv);
+						$dexNumber = sprintf("%+.0f",$floorDex);
+						echo $dexNumber;
+						echo ' = ';?>
+						initiative <b> 
+						<?
+						echo $info['initiative'] +$floorDex;
+						?>
+						</b>						
+						<?
+					}
+					
+					?>
+					
 				</td>
 			</tr>
 			<tr>
 				
 			</tr>
 		</table>
-		<h2>Skills</h2>
+		</br>
+		<div id="h2bar">
+			<h2>Skills</h2>
+		</div>
+		</br>
 		<table>
 			<tr>
 				<td>
@@ -303,9 +335,12 @@ $info = mysql_fetch_array( $data );
 		</br>
 		</br>
 <!-- END TOP OF CHARACTER SHEET-->		
-		
+
 <!-- BEGIN PROFLANG -->
-	<h2>Proficiencies & Languages</h2>	
+	<div id="h2bar">
+		<h2>Features, Proficiencies and Languages</h2>	
+	</div>
+	</br>
 	<?php
 	//Run query to get proflangs
 	$proflang_data = mysql_query("SELECT * FROM proficiency_language WHERE character_id = ".$id." ORDER BY proflang_name")  
@@ -313,36 +348,44 @@ $info = mysql_fetch_array( $data );
 	//iterate through each proflang
 	while($proflang = mysql_fetch_array($proflang_data)) { 
 	//make sure the name contains [] to signify it's in the array
-	?>		
+	?>
+	<div class='proflang_div'>
 		<div class="FloatDiv">
-			<input type='text' name='proflang_name[]' id='proflang_name' value='<?php echo htmlspecialchars($proflang['proflang_name'], ENT_QUOTES) ?>' REQUIRED>
+			<input type='text' name='proflang_name[]' class='proflang_name' value='<?php echo htmlspecialchars($proflang['proflang_name'], ENT_QUOTES) ?>' REQUIRED>
+		</div>
+		<div class="FloatDiv">
+			<input type='text' name='proflang_description[]' class='proflang_description' size='90' value='<?php echo htmlspecialchars($proflang['proflang_description'], ENT_QUOTES) ?>' >
 		</div>
 		<div id="Delete" class="FloatDiv">
 			<a href='delete_proflang.php?id=<?PHP echo $id ?>&proflang=<?php echo $proflang['proflang_id'] ?>'>Delete?</a>
 		</div>
 		<div class="FloatDiv">
-			<input type='hidden' name='proflang_id[]' value='<?php echo $proflang['proflang_id'] ?>'/>	
+			<input type='hidden' name='proflang_id[]' class="proflang_id" value='<?php echo $proflang['proflang_id'] ?>'/>	
 		</div>
 		</br>
 		</br>
+	</div>
 	<?php 
 	//close the PHP WHILE statement
 	} 
 	//then add in the new proflang code below
 	?>		
-	<div class="FloatDiv"><input type="text" name="new_proflang_name" id="new_proflang_name"   placeholder="Add Prof/Lang"></div>
-	<div class="FloatDiv"><input type="submit" name='submit' value="Update Profs/Langs" ></div>
+	<div class="FloatDiv"><input type="text" name="new_proflang_name" id="new_proflang_name"   placeholder="Add Name"></div>
+	<div class="FloatDiv"><input type="text" name="new_proflang_description" size="90" id="new_proflang_description"   placeholder="Add Description"></div>
+	<div class="FloatDiv"><input type="submit" name='submit' value="Add New" ></div>
 	</br>
 	</br>
 <!-- END PROFLANG -->
 
 <!-- BEGIN ATTACKS -->
-	<h2>Attacks and Spellcasting</h2>
-	
+	<div id="h2bar">
+		<h2>Attacks</h2>
+	</div>
+	</br>
 		
 	<?php
 	//Run query to get attacks
-	$attack_data = mysql_query("SELECT * FROM attacks WHERE character_id = " . $id)  
+	$attack_data = mysql_query("SELECT * FROM attacks WHERE character_id = " . $id." ORDER BY attack_name")  
 	or die(mysql_error());
 	// iterate through each attack
 	while($attack = mysql_fetch_array($attack_data)) { 
@@ -377,13 +420,17 @@ $info = mysql_fetch_array( $data );
 	<div class="FloatDiv"><input type="text" name="new_attack_bonus" id="new_attack_bonus"  placeholder="Add Bonus"></div>
 	<div class="FloatDiv"><input type="text" name="new_attack_damage_type" id="new_attack_damage_type"  size='15'  placeholder="Add Damage/Type"></div>
 	<div class="FloatDiv"><input type="text" name="new_attack_description" id="new_attack_description"  size='40'  placeholder="Add Description"></div>
-	<div class="FloatDiv"><input type="submit" name='submit' value="Update Attacks" ></div>
+	<div class="FloatDiv"><input type="submit" name='submit' value="Add New" ></div>
 	</br>
 	</br>
 <!-- END ATTACKS -->
 
 <!-- BEGIN CURRENCY -->
-	<h2>Currency</h2>
+	<div id="h2bar">
+		<h2>Currency</h2>
+	</div>
+	</br>
+	</br>
 	<div style='padding-left:5px;'>
 		<input type="number" name="cp" id="cp"  style="width:110px" value="<?php Print $info['cp_count'] ;?>" required> CP</br></br>
 		<input type="number" name="sp" id="sp"  style="width:110px" value="<?php Print $info['sp_count'] ;?>" required> SP</br></br>
@@ -392,20 +439,23 @@ $info = mysql_fetch_array( $data );
 		<input type="number" name="pp" id="pp"  style="width:110px" value="<?php Print $info['pp_count'] ;?>" required> PP</br></br>
 	</div>
 <!-- END CURRENCY -->
-
+</br> 
 <!-- BEGIN ITEMS -->
-	<h2>Inventory</h2>
+	<div id="h2bar">
+		<h2>Inventory</h2>
+	</div>
+	</br>
 	<?php
 		//Run query to get inventory
-		$inventory_data = mysql_query("SELECT * FROM items WHERE character_id = ".$id)  
+		$inventory_data = mysql_query("SELECT * FROM items WHERE character_id = ".$id." ORDER BY item_name")  
 		or die(mysql_error());
 		// iterate through each item
 		while($item = mysql_fetch_array($inventory_data)) { 
 		//make sure the name contains [] to signify it's in the array
 		?>
 			<div class="FloatDiv"><input type='number' name='item_count[]' style="width:110px" value="<?PHP echo $item['item_count']?>" REQUIRED></div>
-			<div class="FloatDiv"><input type='text' name='item_name[]' size="40" value='<?PHP echo $item['item_name']?>' REQUIRED></div>
-			<div class="FloatDiv"><input type='text' name='item_weight[]' size="10" value='<?PHP echo $item['item_weight']?>'></div>
+			<div class="FloatDiv"><input type='text' name='item_name[]' size="80" value="<?PHP print $item['item_name']?>" REQUIRED></div>
+			<div class="FloatDiv"><input type='text' name='item_weight[]' size="10" value="<?PHP print $item['item_weight']?>"></div>
 			<div id="Delete" class="FloatDiv"><a href='delete_item.php?id=<?PHP echo $id ?>&item=<?php echo $item['item_id'] ?>'>Delete?</a></div>
 			<div class="FloatDiv"><input type='hidden' name='item_id[]' value='<?php echo $item['item_id'] ?>'/></div>
 			</br>
@@ -417,9 +467,9 @@ $info = mysql_fetch_array( $data );
 		?>	
 	
 	<div class="FloatDiv"><input type="number" name="new_item_count" style="width:110px" placeholder="Add Count"></div>
-	<div class="FloatDiv"><input type="text" name="new_item_name" size="40" placeholder="Add Name"></div>
+	<div class="FloatDiv"><input type="text" name="new_item_name" size="80" placeholder="Add Name"></div>
 	<div class="FloatDiv"><input type="text" name="new_item_weight" size="10" placeholder="Add Weight"></div>
-	<div class="FloatDiv"><input type="submit" name='submit' value="Update Items" ></div>
+	<div class="FloatDiv"><input type="submit" name='submit' value="Add New" ></div>
 	</br>
 	</br>	
 <!-- END ITEMS -->

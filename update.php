@@ -20,6 +20,7 @@ $speed = mysqli_real_escape_string($conn, $_POST['speed']);
 $hit_dice = mysqli_real_escape_string($conn, $_POST['hit_dice']);
 $death_success = mysqli_real_escape_string($conn, $_POST['death_success']);
 $death_fail = mysqli_real_escape_string($conn, $_POST['death_fail']);
+$initiative = mysqli_real_escape_string($conn, $_POST['initiative']);
 
 //grab the skills from POST
 $str_skill = mysqli_real_escape_string($conn, $_POST['str_skill']);
@@ -38,26 +39,44 @@ $pp_count = mysqli_real_escape_string($conn, $_POST['pp']);
 
 //grab the proficiencies from POST
 $Athletics = mysqli_real_escape_string($conn, $_POST['Athletics']);
+if ($Athletics == null) { $Athletics = 0;}
 $Acrobatics = mysqli_real_escape_string($conn, $_POST['Acrobatics']);
+if ($Acrobatics == null) { $Acrobatics = 0;}
 $Slight_of_Hand = mysqli_real_escape_string($conn, $_POST['Slight_of_Hand']);
+if ($Slight_of_Hand == null) { $Slight_of_Hand = 0;}
 $Stealth = mysqli_real_escape_string($conn, $_POST['Stealth']);
+if ($Stealth == null) { $Stealth = 0;}
 $Arcana = mysqli_real_escape_string($conn, $_POST['Arcana']);
+if ($Arcana == null) { $Arcana = 0;}
 $History = mysqli_real_escape_string($conn, $_POST['History']);
+if ($History == null) { $History = 0;}
 $Investigation = mysqli_real_escape_string($conn, $_POST['Investigation']);
+if ($Investigation == null) { $Investigation = 0;}
 $Nature = mysqli_real_escape_string($conn, $_POST['Nature']);
+if ($Nature == null) { $Nature = 0;}
 $Religion = mysqli_real_escape_string($conn, $_POST['Religion']);
+if ($Religion == null) { $Religion = 0;}
 $Animal_Handling = mysqli_real_escape_string($conn, $_POST['Animal_Handling']);
+if ($Animal_Handling == null) { $Animal_Handling = 0;}
 $Insight = mysqli_real_escape_string($conn, $_POST['Insight']);
+if ($Insight == null) { $Insight = 0;}
 $Medicine = mysqli_real_escape_string($conn, $_POST['Medicine']);
+if ($Medicine == null) { $Medicine = 0;}
 $Perception = mysqli_real_escape_string($conn, $_POST['Perception']);
+if ($Perception == null) { $Perception = 0;}
 $Survival = mysqli_real_escape_string($conn, $_POST['Survival']);
+if ($Survival == null) { $Survival = 0;}
 $Deception = mysqli_real_escape_string($conn, $_POST['Deception']);
+if ($Deception == null) { $Deception = 0;}
 $Intimidation = mysqli_real_escape_string($conn, $_POST['Intimidation']);
+if ($Intimidation == null) { $Intimidation = 0;}
 $Performance = mysqli_real_escape_string($conn, $_POST['Performance']);
+if ($Performance == null) { $Performance = 0;}
 $Persuasion = mysqli_real_escape_string($conn, $_POST['Persuasion']);
+if ($Persuasion == null) { $Persuasion = 0;}
 
 //Update the fields listed above
-$sql1 = "UPDATE character_sheet SET character_name='$character_name', level=$level, experience=$experience, class_level='$class_level', background='$background', race='$race', alignment='$alignment', max_hp=$max_hp, current_hp=$current_hp, armor=$armor, speed=$speed, hit_dice='$hit_dice', death_success=$death_success, death_fail=$death_fail, str_skill=$str_skill, dex_skill=$dex_skill, con_skill=$con_skill, int_skill=$int_skill, wis_skill=$wis_skill, chr_skill=$chr_skill, cp_count=$cp_count, sp_count=$sp_count, ep_count=$ep_count, gp_count=$gp_count, pp_count=$pp_count, Athletics='$Athletics', Acrobatics='$Acrobatics', Slight_of_Hand='$Slight_of_Hand', Stealth='$Stealth', Arcana='$Arcana', History='$History', Investigation='$Investigation', Nature='$Nature', Religion='$Religion', Animal_Handling='$Animal_Handling', Insight='$Insight', Medicine='$Medicine', Perception='$Perception', Survival='$Survival', Deception='$Deception', Intimidation='$Intimidation', Persuasion='$Persuasion', Performance='$Performance'  WHERE character_id = '$id'";
+$sql1 = "UPDATE character_sheet SET character_name='$character_name', level=$level, inspiration=$inspiration, experience=$experience, class_level='$class_level', background='$background', race='$race', alignment='$alignment', max_hp=$max_hp, current_hp=$current_hp, armor=$armor, speed=$speed, hit_dice='$hit_dice', death_success=$death_success, death_fail=$death_fail, initiative=$initiative, str_skill=$str_skill, dex_skill=$dex_skill, con_skill=$con_skill, int_skill=$int_skill, wis_skill=$wis_skill, chr_skill=$chr_skill, cp_count=$cp_count, sp_count=$sp_count, ep_count=$ep_count, gp_count=$gp_count, pp_count=$pp_count, Athletics='$Athletics', Acrobatics='$Acrobatics', Slight_of_Hand='$Slight_of_Hand', Stealth='$Stealth', Arcana='$Arcana', History='$History', Investigation='$Investigation', Nature='$Nature', Religion='$Religion', Animal_Handling='$Animal_Handling', Insight='$Insight', Medicine='$Medicine', Perception='$Perception', Survival='$Survival', Deception='$Deception', Intimidation='$Intimidation', Persuasion='$Persuasion', Performance='$Performance'  WHERE character_id = '$id'";
 
 if ($conn->query($sql1) === TRUE) {
 	} 
@@ -173,10 +192,11 @@ for($i = 0; $i < count($attack_id); $i++){
 
 //new proflang escaped
 $new_proflang_name = mysqli_real_escape_string($conn, $_POST['new_proflang_name']);
+$new_proflang_description = mysqli_real_escape_string($conn, $_POST['new_proflang_description']);
 
 //Check if the new proflang_name field is not empty, then insert the item into the DB
 if (!empty($new_proflang_name)){
-	$sql2 = "INSERT INTO proficiency_language (proflang_name, character_id) VALUES('$new_proflang_name',  $id)";
+	$sql2 = "INSERT INTO proficiency_language (proflang_name, character_id, proflang_description) VALUES('$new_proflang_name',  $id, '$new_proflang_description')";
 
 	if ($conn->query($sql2) === TRUE) {
 	}
@@ -188,16 +208,19 @@ if (!empty($new_proflang_name)){
 
 //define the variables 
 $proflang_name = $_POST['proflang_name'];
+$proflang_description = $_POST['proflang_description'];
 $proflang_id = $_POST['proflang_id'];
+
 
 //Check the number of proflang and assign them a temporary number while the loop goes an updates each line by line
 for($i = 0; $i < count($proflang_id); $i++){
 	//escape the strings and assign $i
 	$proflang_name_array = mysqli_real_escape_string($conn, $proflang_name[$i]);
+	$proflang_description_array = mysqli_real_escape_string($conn, $proflang_description[$i]);
 	$proflang_id_array =mysqli_real_escape_string($conn, $proflang_id[$i]);
 
 	//Run the update
-	$sql3 ="UPDATE proficiency_language SET proflang_name='$proflang_name_array' WHERE proflang_id = '$proflang_id_array'";
+	$sql3 ="UPDATE proficiency_language SET proflang_name='$proflang_name_array', proflang_description='$proflang_description_array' WHERE proflang_id = '$proflang_id_array'";
 	
 	if ($conn->query($sql3) === TRUE) {	
 	}
